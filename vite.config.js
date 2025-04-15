@@ -11,9 +11,19 @@ const extraShared = ['shared/swiper.css']; // You can also use swiper.css if pre
 
 // Build the input map for Vite
 const input = {};
-[...jsFiles, ...cssFiles, ...extraShared].forEach((file) => {
-  const name = file.replace(/\.(js|css)$/, ''); // strip extension
+
+// First add JS files
+jsFiles.forEach((file) => {
+  const name = file.replace(/\.js$/, '');
   input[name] = resolve(__dirname, file);
+});
+
+// Then add CSS only if not already defined
+cssFiles.concat(extraShared).forEach((file) => {
+  const name = file.replace(/\.css$/, '');
+  if (!input[name]) {
+    input[name] = resolve(__dirname, file);
+  }
 });
 
 export default defineConfig({
