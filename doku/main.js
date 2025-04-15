@@ -1,3 +1,6 @@
+import { numberRollupObserver } from '../../shared/utils/numberRollup';
+numberRollupObserver(); // will auto-init on scroll
+
 (function () {
     const UTM_HEADER = "utm_source=dokucom&utm_content=header";
     const UTM_FOOTER = "utm_source=dokucom&utm_content=footer";
@@ -26,3 +29,7 @@
     // Footer = footer element or footer class
     addUTMToLinks("footer a[href], .footer a[href]", "footer");
   })();
+
+// 
+
+
