@@ -7,7 +7,7 @@ const jsFiles = fg.sync('client/**/doku/**/*.js');
 const cssFiles = fg.sync('client/**/doku/**/*.css');
 
 // Manually include shared files that aren't under doku/
-const extraShared = ['shared/swiper.css']; // You can also use swiper.css if preferred
+const extraShared = ['shared/swiper.css', 'shared/keen.css']; // You can also use swiper.css if preferred
 
 // Build the input map for Vite
 const input = {};

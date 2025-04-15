@@ -19,6 +19,7 @@
     "vite": "^6.2.6"
   },
   "dependencies": {
+    "keen-slider": "^6.8.6",
     "swiper": "^11.2.6"
   }
 }

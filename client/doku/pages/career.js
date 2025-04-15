@@ -1,42 +1,34 @@
-/*
-import { initializeKeenSlider } from '../utils/keen-slider';
+import KeenSlider from 'keen-slider';
 
-const animation = { duration: 20000, easing: function (t) { return t; } };
-
-const careerSlider = initializeKeenSlider('#my-keen-slider', {
-  loop: true,
-  renderMode: 'performance',
-  drag: true,
-  slides: {
-    perView: 5,
-    spacing: 8,
-  },
-  breakpoints: {
-    '(max-width: 991px)': {
+const element = document.querySelector('#my-keen-slider');
+  if (element) {
+    new KeenSlider(element, {
+      loop: true,
+      renderMode: 'performance',
+      drag: true,
       slides: {
-        perView: 3,
+        perView: 5,
         spacing: 8,
       },
-    },
-    '(max-width: 767px)': {
-      slides: {
-        perView: 2,
-        spacing: 8,
+      breakpoints: {
+        '(max-width: 991px)': {
+          slides: {
+            perView: 3,
+            spacing: 8,
+          },
+        },
+        '(max-width: 767px)': {
+          slides: {
+            perView: 2,
+            spacing: 8,
+          },
+        },
       },
-    },
-  },
-  created: function (s) {
-    s.moveToIdx(5, true, animation);
-  },
-  updated: function (s) {
-    s.moveToIdx(s.track.details.abs + 5, true, animation);
-  },
-  animationEnded: function (s) {
-    s.moveToIdx(s.track.details.abs + 5, true, animation);
-  },
-});
-*/
+    });
+}
 
+
+// API Function to fetch data
 (async () => {
     const proxyUrl   = 'https://proxy-server-doku.vercel.app/api/division-proxy';
     const container  = document.getElementById('career-api');
