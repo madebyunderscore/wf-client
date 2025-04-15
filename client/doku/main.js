@@ -1,5 +1,5 @@
 import { numberRollupObserver } from '../../shared/utils/numberRollup.js';
-numberRollupObserver(); // will auto-init on scroll
+numberRollupObserver(); 
 
 (function () {
     const UTM_HEADER = "utm_source=dokucom&utm_content=header";
