@@ -4,10 +4,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 // Register Swiper modules manually
 Swiper.use([Navigation, Pagination]);
 
-// Init Swiper after Webflow finishes loading
-window.Webflow ||= [];
-window.Webflow.push(() => {
-  const blogFeatSwiper = new Swiper('.swiper.is-blog-feat', {
+const blogFeatSwiper = new Swiper('.swiper.is-blog-feat', {
     spaceBetween: 24,
     loop: true,
     pagination: {
@@ -29,4 +26,3 @@ window.Webflow.push(() => {
       },
     },
   });
-});
