@@ -1,4 +1,4 @@
-import { numberRollupObserver } from '../../shared/utils/numberRollup';
+import { numberRollupObserver } from '../../shared/utils/numberRollup.js';
 numberRollupObserver(); // will auto-init on scroll
 
 (function () {
@@ -30,6 +30,6 @@ numberRollupObserver(); // will auto-init on scroll
     addUTMToLinks("footer a[href], .footer a[href]", "footer");
   })();
 
-// 
+  console.log('Main JS loaded');
 
 
