@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 export default defineConfig({
   build: {
     lib: {
       entry: {
-        'doku/main': 'doku/main.js',
+        'doku/main': resolve(__dirname, 'doku/main.js'),
       },
       formats: ['es'],
     },

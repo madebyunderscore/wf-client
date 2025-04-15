@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "vite build",
+    "build:js": "vite build",
+    "build:css": "cleancss -o dist/doku/main.min.css doku/main.css",
+    "build": "pnpm build:js && pnpm build:css",
     "dev": "vite"
   },
   "keywords": [],
