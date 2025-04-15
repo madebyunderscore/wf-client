@@ -3,8 +3,8 @@ import { resolve } from 'path';
 import fg from 'fast-glob';
 
 // Auto-discover all JS and CSS files inside the doku folder
-const jsFiles = fg.sync('doku/**/*.js');
-const cssFiles = fg.sync('doku/**/*.css');
+const jsFiles = fg.sync('client/**/doku/**/*.js');
+const cssFiles = fg.sync('client/**/doku/**/*.css');
 
 // Manually include shared files that aren't under doku/
 const extraShared = ['shared/swiper.css']; // You can also use swiper.css if preferred
