@@ -4,13 +4,14 @@ import { addUTMToExternalLinks } from '../../shared/utils/utm-tagging.js';
 import { storeUTMParameters, appendUTMParametersToLinks } from '../../shared/utils/utm-utils.js';
 import { updateIframeWithUTM } from '../../shared/utils/iframe-utm-utils.js';
 import { setupNavbarScrollEffect } from './utils/navbar-scroll.js';
-numberRollupObserver();
-setupNavbarScrollEffect();
 
 window.addEventListener('DOMContentLoaded', () => {
+  numberRollupObserver();
+  setupNavbarScrollEffect();
+
   // UTM tagging
   addUTMToExternalLinks({
-    source: 'dokucom2',
+    source: 'dokucom',
     contentMap: {
       'header a[href], .navbar a[href]': 'header',
       'footer a[href], .footer a[href]': 'footer',

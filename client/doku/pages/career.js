@@ -1,33 +1,3 @@
-import KeenSlider from 'keen-slider';
-
-const element = document.querySelector('#my-keen-slider');
-  if (element) {
-    new KeenSlider(element, {
-      loop: true,
-      renderMode: 'performance',
-      drag: true,
-      slides: {
-        perView: 5,
-        spacing: 8,
-      },
-      breakpoints: {
-        '(max-width: 991px)': {
-          slides: {
-            perView: 3,
-            spacing: 8,
-          },
-        },
-        '(max-width: 767px)': {
-          slides: {
-            perView: 2,
-            spacing: 8,
-          },
-        },
-      },
-    });
-}
-
-
 // API Function to fetch data
 (async () => {
     const proxyUrl   = 'https://proxy-server-doku.vercel.app/api/division-proxy';
