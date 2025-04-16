@@ -1,3 +1,4 @@
+console.log('[Debug] imported:', numberRollupObserver, addUTMToExternalLinks);
 import { numberRollupObserver } from '../../shared/utils/numberRollup.js';
 import { addUTMToExternalLinks } from '../../shared/utils/utm-tagging.js';
 import { storeUTMParameters, appendUTMParametersToLinks } from '../../shared/utils/utm-utils.js';
