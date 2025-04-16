@@ -2,6 +2,19 @@ import { numberRollupObserver } from '../../shared/utils/numberRollup.js';
 numberRollupObserver(); 
 
 
+import { storeUTMParameters, appendUTMParametersToLinks } from '../../shared/utils/utm-utils.js';
+import { updateIframeWithUTM } from '../../shared/utils/iframe-utm-utils.js';
+
+function onReady() {
+  console.log('onReady fired. Document and all resources loaded.');
+  storeUTMParameters();
+  appendUTMParametersToLinks();
+  updateIframeWithUTM(); 
+}
+
+window.addEventListener('load', onReady);
+
+
 // Add auto scroll in animation to all sections
 const sectionObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
