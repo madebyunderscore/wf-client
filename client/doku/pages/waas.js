@@ -1,5 +1,4 @@
 import KeenSlider from 'keen-slider';
-
 const animation = {
     duration: 100000,
     easing: function (t) {
