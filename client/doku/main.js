@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // UTM tagging
   addUTMToExternalLinks({
-    source: 'dokucom',
+    source: 'dokucom2',
     contentMap: {
       'header a[href], .navbar a[href]': 'header',
       'footer a[href], .footer a[href]': 'footer',
