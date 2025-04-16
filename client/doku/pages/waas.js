@@ -1,13 +1,15 @@
-import { intializekeenSlider } from 'keen-slider';
+import KeenSlider from 'keen-slider';
 
-const animation = {
+document.addEventListener('DOMContentLoaded', () => {
+  const element = document.querySelector('#waas-slider');
+  if (!element) return;
+
+  const animation = {
     duration: 100000,
-    easing: function (t) {
-      return t;
-    },
+    easing: t => t,
   };
-  
-  const careerSliderOptions = {
+
+  new KeenSlider(element, {
     loop: true,
     renderMode: 'performance',
     drag: true,
@@ -17,28 +19,20 @@ const animation = {
     },
     breakpoints: {
       '(max-width: 991px)': {
-        slides: {
-          perView: 2,
-          spacing: 24,
-        },
+        slides: { perView: 2, spacing: 24 },
       },
       '(max-width: 767px)': {
-        slides: {
-          perView: 1,
-          spacing: 24,
-        },
+        slides: { perView: 1, spacing: 24 },
       },
     },
-    created: function (slider) {
-      slider.moveToIdx(5, true, animation);
+    created(s) {
+      s.moveToIdx(5, true, animation);
     },
-    updated: function (slider) {
-      slider.moveToIdx(slider.track.details.abs + 5, true, animation);
+    updated(s) {
+      s.moveToIdx(s.track.details.abs + 5, true, animation);
     },
-    animationEnded: function (slider) {
-      slider.moveToIdx(slider.track.details.abs + 5, true, animation);
+    animationEnded(s) {
+      s.moveToIdx(s.track.details.abs + 5, true, animation);
     },
-  };
-  
-  // Initialize the career slider
-  initializeKeenSlider('#waas-reviews-slider', careerSliderOptions);
+  });
+});
