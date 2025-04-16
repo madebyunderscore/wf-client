@@ -1,3 +1,9 @@
+// This function stores UTM parameters from the URL into session storage.
+// It retrieves UTM parameters from the URL and stores them in session storage.
+// It uses session storage to persist the parameters across page reloads.
+// It only stores UTM parameters if they are present in the URL.
+// It uses URLSearchParams to parse the URL and extract UTM parameters.
+
 export function storeUTMParameters() {
     const urlParams = new URLSearchParams(window.location.search);
     const utmParams = {};

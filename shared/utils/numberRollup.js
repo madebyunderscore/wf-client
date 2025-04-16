@@ -1,3 +1,10 @@
+// This function animates a number rollup effect when the element comes into view.
+// It uses Intersection Observer to detect when the element is in view.
+// The number is animated from 0 to its final value over a specified duration.
+// The default duration is 2000ms.
+// The function takes an optional selector to target specific elements.
+// The default selector is '[counter-element="number"]'.
+
 export function numberRollupObserver({
     selector = '[counter-element="number"]',
     defaultDuration = 2000,
