@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import fg from 'fast-glob';
 
 // Auto-discover all JS and CSS files inside the doku folder
-const jsFiles = fg.sync('client/**/doku/**/*.js');
+const jsFiles = fg.sync('client/**/doku/**/*.js').concat(fg.sync('client/**/doku/*.js'));
 const cssFiles = fg.sync('client/**/doku/**/*.css');
 
 // Manually include shared files that aren't under doku/
@@ -25,7 +25,7 @@ cssFiles.concat(extraShared).forEach((file) => {
     input[name] = resolve(__dirname, file);
   }
 });
-
+console.log('Vite build input files:', Object.keys(input));
 export default defineConfig({
   build: {
     rollupOptions: {
