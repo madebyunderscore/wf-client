@@ -6,7 +6,7 @@ const animation = {
       return t;
     },
   };
-  
+
   const careerSliderOptions = {
     loop: true,
     renderMode: 'performance',
@@ -39,6 +39,14 @@ const animation = {
       s.moveToIdx(s.track.details.abs + 5, true, animation);
     },
   };
-  
-  // Initialize the career slider
-  initializeKeenSlider('#waas-reviews-slider', careerSliderOptions);
+
+  function initializeKeenSlider(selector, options) {
+    const element = document.querySelector(selector);
+    if (element) {
+      new KeenSlider(element, options);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    initializeKeenSlider('#waas-reviews-slider', careerSliderOptions);
+  });
