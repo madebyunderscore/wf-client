@@ -1,6 +1,39 @@
 import { numberRollupObserver } from '../../shared/utils/numberRollup.js';
 numberRollupObserver(); 
 
+
+// Add auto scroll in animation to all sections
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      sectionObserver.unobserve(entry.target);
+    }
+  });
+});
+
+// Apply to all sections
+document.querySelectorAll('section').forEach(section => {
+  sectionObserver.observe(section);
+});
+
+// Individual reveal observer (for custom elements only)
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+});
+
+// Apply only to elements with data-reveal
+document.querySelectorAll('[data-reveal]').forEach(el => {
+  revealObserver.observe(el);
+});
+
+
+// UTM tagging for external links
 (function () {
     const UTM_HEADER = "utm_source=dokucom&utm_content=header";
     const UTM_FOOTER = "utm_source=dokucom&utm_content=footer";
@@ -29,7 +62,3 @@ numberRollupObserver();
     // Footer = footer element or footer class
     addUTMToLinks("footer a[href], .footer a[href]", "footer");
   })();
-
-  console.log('Main JS loaded');
-
-
