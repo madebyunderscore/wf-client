@@ -4,12 +4,10 @@ import { addUTMToExternalLinks } from '../../shared/utils/utm-tagging.js';
 import { storeUTMParameters, appendUTMParametersToLinks } from '../../shared/utils/utm-utils.js';
 import { updateIframeWithUTM } from '../../shared/utils/iframe-utm-utils.js';
 import { setupNavbarScrollEffect } from './utils/navbar-scroll.js';
+numberRollupObserver();
+setupNavbarScrollEffect();
 
 window.addEventListener('DOMContentLoaded', () => {
-  // Rollup numbers & navbar scroll
-  numberRollupObserver();
-  setupNavbarScrollEffect();
-
   // UTM tagging
   addUTMToExternalLinks({
     source: 'dokucom2',
