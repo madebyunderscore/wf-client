@@ -5,79 +5,49 @@ import { updateIframeWithUTM } from '../../shared/utils/iframe-utm-utils.js';
 import { setupNavbarScrollEffect } from './utils/navbar-scroll.js';
 
 window.addEventListener('DOMContentLoaded', () => {
+  // Rollup numbers & navbar scroll
   numberRollupObserver();
   setupNavbarScrollEffect();
 
+  // UTM tagging
   addUTMToExternalLinks({
-    source: 'dokucom', // Replace with project-specific name
+    source: 'dokucom',
     contentMap: {
       'header a[href], .navbar a[href]': 'header',
       'footer a[href], .footer a[href]': 'footer',
     },
   });
-});
 
-window.addEventListener('load', () => {
-  console.log('onReady fired. Document and all resources loaded.');
-  storeUTMParameters();
-  appendUTMParametersToLinks();
-  updateIframeWithUTM(); // call without ID to use default targeting logic
-});
-
-// Add auto scroll in animation to all sections
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in-view');
-      sectionObserver.unobserve(entry.target);
-    }
-  });
-});
-
-// Apply to all sections
-document.querySelectorAll('section').forEach(section => {
-  sectionObserver.observe(section);
-});
-
-// Individual reveal observer (for custom elements only)
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in-view');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-});
-
-// Apply only to elements with data-reveal
-document.querySelectorAll('[data-reveal]').forEach(el => {
-  revealObserver.observe(el);
-});
-
-// Add hover tab functionality
-// This function simulates a click on elements with the attribute 'und-tab="hover"' when hovered
-document.addEventListener('DOMContentLoaded', () => {
-  // Select all elements with the 'und-tab="hover"' attribute
-  const tabs = document.querySelectorAll('[und-tab="hover"]');
-
-  // Add an event listener to each element to trigger a click on hover
-  tabs.forEach(function(tab) {
-    tab.addEventListener('mouseenter', function() {
-      tab.click();
+  // Section reveal animation
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        sectionObserver.unobserve(entry.target);
+      }
     });
   });
-});
 
-// Add mobile dropdown functionality. This function creates a mobile dropdown from desktop navigation tabs
-// It listens for clicks and keyboard events to toggle the dropdowns. It uses aria attributes for accessibility
-// It creates a new dropdown structure for mobile view. It ensures that only one dropdown is open at a time
-document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('section').forEach(section => sectionObserver.observe(section));
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+
+  // Hover-to-click tabs
+  document.querySelectorAll('[und-tab="hover"]').forEach((tab) => {
+    tab.addEventListener('mouseenter', () => tab.click());
+  });
+
+  // Mobile nav dropdown replication from desktop
   const desktopNavDropdowns = document.querySelectorAll('.nav-link_dd');
-
-  if (!desktopNavDropdowns.length) {
-    console.error('No desktop navigation dropdowns found with class "nav-link_dd".');
-    return;
-  }
 
   desktopNavDropdowns.forEach((dropdown, dropdownIndex) => {
     const desktopTabLinks = dropdown.querySelectorAll('.nav-dd_tab-menu-link');
@@ -89,9 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Clear old mobile dropdowns
     mobileNavContainer.innerHTML = '';
-
     const fragment = document.createDocumentFragment();
 
     desktopTabLinks.forEach((tabLink, index) => {
@@ -101,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const mobileDd = document.createElement('div');
       mobileDd.className = 'nav-mobile-dd';
 
-      // Toggle
       const toggle = document.createElement('div');
       toggle.className = 'nav-mobile-dd_toggle';
       toggle.innerHTML = tabLink.innerHTML;
@@ -114,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
       toggle.setAttribute('aria-expanded', 'false');
       toggle.tabIndex = 0;
 
-      // Content
       const btm = document.createElement('div');
       btm.className = 'nav-mobile-dd_btm';
       btm.id = contentId;
@@ -134,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mobileNavContainer.appendChild(fragment);
 
-    // Click event
+    // Toggle open/close
     mobileNavContainer.addEventListener('click', (event) => {
       const toggle = event.target.closest('.nav-mobile-dd_toggle');
       if (!toggle) return;
@@ -142,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const btm = toggle.nextElementSibling;
       const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
 
-      // Close all first
       mobileNavContainer.querySelectorAll('.nav-mobile-dd_btm').forEach(el => el.style.display = 'none');
       mobileNavContainer.querySelectorAll('.nav-mobile-dd_toggle').forEach(el => el.setAttribute('aria-expanded', 'false'));
 
@@ -152,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Keyboard support
+    // Keyboard accessibility
     mobileNavContainer.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
       const toggle = event.target.closest('.nav-mobile-dd_toggle');
@@ -162,4 +127,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+});
+
+// Load event (waits for all assets)
+window.addEventListener('load', () => {
+  console.log('onReady fired. Document and all resources loaded.');
+  try {
+    storeUTMParameters();
+    appendUTMParametersToLinks();
+    updateIframeWithUTM();
+  } catch (err) {
+    console.error('UTM handling error:', err);
+  }
 });
